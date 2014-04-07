@@ -1,0 +1,24 @@
+<h2>Custom Relations</h2>
+
+<table class="list">
+  <thead><tr>
+    <th><%=l(:relation_name)%></th>
+    <th><%=l(:project_name)%></th>
+    <th><%=l(:custom_field)%></th>
+    <th><%=l(:actions)%></th>
+  </tr></thead>
+  <tbody>
+    <%- @custom_relations_fields.each do |field| %>
+      <tr>
+        <td><%= field.name %></td>
+        <td><%= link_to field.project, field.project %></td>
+        <td><%= link_to field.custom_field.name, custom_fields_path %></td>
+        <td class="buttons">
+          <%= delete_link custom_relation_path(field) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to l(:label_custom_relation_new), new_custom_relation_path, :class => 'icon icon-add' %></p>
