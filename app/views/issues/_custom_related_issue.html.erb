@@ -1,0 +1,23 @@
+<% if related_issue %>
+  <%= link_to_issue(related_issue) %>
+<% else %>
+  <%#= link_to l(:button_add), 'javascript:;',  %>
+  <%#= toggle_link l(:button_add), 'new-custom_relation-form', {:focus => 'relation_issue_to_id'} %>
+  <%= toggle_link l(:button_add), "new-custom_relation-form-#{custom_relations_field.id}", {:focus => 'relation_issue_to_id'} %>
+<% end %>
+
+<%= form_for CustomRelationsValue.new, {
+                 :as => :custom_relations_value, # :remote => true,
+                 :url => custom_relations_path,
+                 :method => :post,
+                 :html => {:id => "new-custom_relation-form-#{custom_relations_field.id}", :style => 'display: none;'}
+} do |f| %>
+<%= f.hidden_field :issue_id, :value => issue.id %>
+<%= f.hidden_field :custom_relations_field_id, :value => custom_relations_field.id %>
+<%#= error_messages_for 'custom_relations_value' %>
+<p>
+<%= l(:label_issue) %> #<%= f.text_field :issue_to_id, :size => 10 %>
+<%= submit_tag l(:button_add) %>
+<%= link_to_function l(:button_cancel), "$('#new-custom_relation-form-#{custom_relations_field.id}').hide();"%>
+</p>
+<% end %>

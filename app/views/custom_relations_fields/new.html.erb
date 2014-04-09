@@ -1,0 +1,5 @@
+<h2>New custom relation field</h2>
+<%= labelled_form_for :custom_relations_field, @custom_relations_field, :url => custom_relations_fields_path, :method => :post, :html => {:id => 'custom_field_form'} do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_create) %>
+<% end %>
