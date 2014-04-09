@@ -11,8 +11,8 @@ module IssuesHelperPatch
     def render_custom_relations_rows(issue)
 
       fields = issue.project.custom_relations_fields
-      values = Hash[issue.custom_relations_values.map{|v| [v.field.id, v.related_issue]}]
       return if fields.empty?
+      values = Hash[issue.custom_relations_values.map{|v| [v.custom_relations_field.id, v.related_issue]}]
       ordered_fields = []
       half = (fields.size / 2.0).ceil
       half.times do |i|
@@ -25,9 +25,10 @@ module IssuesHelperPatch
       ordered_fields.compact.each do |field|
         s << "</tr>\n<tr>\n" if n > 0 && (n % 2) == 0
         if values[field.id]
-          related_issue = values[field.id].name
+          related_issue = link_to_issue(values[field.id])
         else
-          related_issue = "-"
+          related_issue = toggle_link l(:button_add), 'new-custom_relation-form', {:focus => 'relation_issue_to_id'}
+          # link_to(t(:button_add), "javascript:;", :class => 'icon icon-add')
         end
         s << "\t<th>#{ h(field.name) }:</th><td>#{related_issue}</td>\n"
         #{ simple_format_without_paragraph(h(show_value(field))) }

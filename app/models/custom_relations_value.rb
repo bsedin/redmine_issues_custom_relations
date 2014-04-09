@@ -3,5 +3,5 @@ class CustomRelationsValue < ActiveRecord::Base
 
   belongs_to :custom_relations_field
   belongs_to :issue
-  belongs_to :related_issue, :class_name => 'Issue', :foreign_key => 'related_issue_id'
+  belongs_to :related_issue, :class_name => 'Issue', :foreign_key => 'issue_to_id'
 end
