@@ -1,6 +1,8 @@
 class CustomRelationsFieldsController < ApplicationController
   unloadable
 
+  # before_filter :authorize
+
   def index
     @custom_relations_fields = CustomRelationsField.all
   end
@@ -14,7 +16,7 @@ class CustomRelationsFieldsController < ApplicationController
     if @custom_relations_field.save!
       flash[:notice] = l(:notice_custom_relations_field_successful_create)
     end
-    redirect_to :index
+    redirect_to :action => :index
   end
 
 end

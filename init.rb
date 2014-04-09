@@ -14,5 +14,5 @@ Redmine::Plugin.register :issues_custom_relations do
   menu :admin_menu, :custom_relations_fields, { :controller => 'custom_relations_fields', :action => 'index' }, :caption => 'Custom Relations Fields'
 
   permission :view_custom_relations_fields, :custom_relations_fields => :index
-  permission :edit_custom_relations_fields, :custom_relations_fields => :create
+  permission :edit_custom_relations_fields, :custom_relations_fields => [:create, :update, :new, :destroy]
 end

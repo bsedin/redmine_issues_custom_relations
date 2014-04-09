@@ -4,3 +4,4 @@ en:
   edit_custom_relations_fields: 'Edit custom relations fields'
   view_custom_relations_fields: 'View custom relations fields'
   label_custom_relations_field: 'Custom relation field'
+  notice_custom_relations_field_successful_create: 'Custom relation field successfully created'
