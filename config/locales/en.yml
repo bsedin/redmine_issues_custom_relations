@@ -1,2 +1,6 @@
 en:
   label_custom_relations_field_new: 'Add new relation field'
+  custom_relations_fields: 'Custom Relations Fields'
+  edit_custom_relations_fields: 'Edit custom relations fields'
+  view_custom_relations_fields: 'View custom relations fields'
+  label_custom_relations_field: 'Custom relation field'
