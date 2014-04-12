@@ -3,18 +3,20 @@
 <table class="list">
   <thead><tr>
     <th><%=l(:label_custom_relations_field)%></th>
-    <th><%=l(:label_project)%></th>
+    <th><%=l(:label_enable_for_project)%></th>
+    <th><%=l(:label_target_project)%></th>
     <th><%=l(:label_custom_field)%></th>
     <th></th>
   </tr></thead>
   <tbody>
     <%- @custom_relations_fields.each do |field| %>
       <tr>
-        <td><%= field.name %></td>
+        <td><%= link_to field.name, edit_custom_relations_field_path(field) %></td>
         <td><%= link_to field.project, field.project %></td>
+        <td><%= link_to field.target_project, field.target_project %></td>
         <td><%= link_to field.custom_field.name, custom_fields_path %></td>
         <td class="buttons">
-          <%= delete_link custom_relation_path(field) %>
+          <%= delete_link custom_relations_field_path(field) %>
         </td>
       </tr>
     <% end %>

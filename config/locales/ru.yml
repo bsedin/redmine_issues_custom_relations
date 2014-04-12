@@ -1,0 +1,12 @@
+ru:
+  label_custom_relations_field_new: 'Добавить новое необычное отношение'
+  custom_relations_fields: 'Необычные отношения'
+  label_new_custom_relations_field: 'Новое необычное отношение'
+  edit_custom_relations_fields: 'Изменение необычные отношения'
+  view_custom_relations_fields: 'Просмотр необычных отношений'
+  label_custom_relations_field: 'Поле необычных отношений'
+  label_enable_for_project: 'Поле включено для проекта'
+  label_target_project: 'Привязывать задачи проекта'
+  field_custom_field: 'Настраиваемое поле'
+  label_edit_custom_relations_field: 'Редактирование поля необычного отношения'
+  field_project_to: 'Связывать задачи из проекта'

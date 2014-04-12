@@ -8,5 +8,6 @@
 <p><%= f.text_field :name, :required => true %></p>
 <p><%= f.select :project_id, project_tree_options_for_select(Project.all, :selected => @custom_relations_field.project), {:required => true} %></p>
 <p><%= f.select :custom_field_id, CustomField.all.map{|cf| [cf.name, cf.id]}, {:required => true} %></p>
+<p><%= f.select :project_to_id, project_tree_options_for_select(Project.all, :selected => @custom_relations_field.target_project), {:required => true} %></p>
 
 </div>

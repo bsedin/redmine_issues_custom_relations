@@ -1,9 +1,12 @@
 <% if related_issue %>
-  <%= link_to_issue(related_issue) %>
+  <%= link_to related_issue.subject, related_issue %>
+  <% if @edit_allowed %>
+    <%= toggle_link l(:button_edit), "new-custom_relation-form-#{custom_relations_field.id}", {:focus => 'relation_issue_to_id'} %>
+  <% end %>
 <% else %>
-  <%#= link_to l(:button_add), 'javascript:;',  %>
-  <%#= toggle_link l(:button_add), 'new-custom_relation-form', {:focus => 'relation_issue_to_id'} %>
-  <%= toggle_link l(:button_add), "new-custom_relation-form-#{custom_relations_field.id}", {:focus => 'relation_issue_to_id'} %>
+  <% if @edit_allowed %>
+    <%= toggle_link l(:button_add), "new-custom_relation-form-#{custom_relations_field.id}", {:focus => 'relation_issue_to_id'} %>
+  <% end %>
 <% end %>
 
 <%= form_for CustomRelationsValue.new, {
@@ -14,10 +17,12 @@
 } do |f| %>
 <%= f.hidden_field :issue_id, :value => issue.id %>
 <%= f.hidden_field :custom_relations_field_id, :value => custom_relations_field.id %>
-<%#= error_messages_for 'custom_relations_value' %>
 <p>
-<%= l(:label_issue) %> #<%= f.text_field :issue_to_id, :size => 10 %>
-<%= submit_tag l(:button_add) %>
+<% custom_values = Issue.where(:project_id => custom_relations_field.project_to_id).joins(:custom_values).where(:custom_values => {:custom_field_id => custom_relations_field.custom_field_id}).map{|x| [x.custom_values.first.value, x.custom_values.first.customized_id]} %>
+<% custom_relations_value = issue.custom_relations_values.select{|crv| crv.custom_relations_field_id == custom_relations_field.id}.first %>
+<% custom_relations_value = custom_relations_value.issue_to_id if custom_relations_value %>
+<%= f.select :issue_to_id, options_for_select(custom_values, :selected => custom_relations_value), { :include_blank => true } %>
+<%= submit_tag l(:button_save) %>
 <%= link_to_function l(:button_cancel), "$('#new-custom_relation-form-#{custom_relations_field.id}').hide();"%>
 </p>
 <% end %>
