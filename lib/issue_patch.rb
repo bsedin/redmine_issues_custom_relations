@@ -9,7 +9,7 @@ module IssuePatch
     base.class_eval do
       unloadable
 
-      has_many :custom_relations_values
+      has_many :custom_relations_values, :dependent => :delete_all
     end
 
   end

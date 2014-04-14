@@ -9,7 +9,7 @@ module ProjectPatch
     base.class_eval do
       unloadable
 
-      has_many :custom_relations_fields
+      has_many :custom_relations_fields, :dependent => :destroy
     end
 
   end
