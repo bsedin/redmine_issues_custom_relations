@@ -1,0 +1,18 @@
+<% custom_relations_fields = @project.custom_relations_fields %>
+<div class="splitcontent">
+<div class="splitcontentleft">
+<% i = 0 %>
+<% split_on = (custom_relations_fields.size / 2.0).ceil - 1 %>
+<% custom_relations_fields.each do |field| %>
+  <% custom_values = Issue.where(:project_id => field.project_to_id).joins(:custom_values).where(:custom_values => {:custom_field_id => field.custom_field_id}).map{|x| [x.custom_values.first.value, x.custom_values.first.customized_id]}.sort_by{|v| v[0].mb_chars.downcase} %>
+  <p>
+    <label><%= field.name %></label>
+    <%= select_tag "issue[custom_relations_values][#{field.id}]", options_for_select(custom_values), {:include_blank => true} %>
+  </p>
+<% if i == split_on -%>
+</div><div class="splitcontentright">
+<% end -%>
+<% i += 1 -%>
+<% end -%>
+</div>
+</div>
