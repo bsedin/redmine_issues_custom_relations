@@ -18,7 +18,11 @@
 <%= f.hidden_field :issue_id, :value => issue.id %>
 <%= f.hidden_field :custom_relations_field_id, :value => custom_relations_field.id %>
 <p>
-<% custom_values = Issue.where(:project_id => custom_relations_field.project_to_id).joins(:custom_values).where(:custom_values => {:custom_field_id => custom_relations_field.custom_field_id}).map{|x| [x.custom_values.first.value, x.custom_values.first.customized_id]}.sort_by{|v| v[0].mb_chars.downcase} %>
+<% custom_values = [] %>
+<% Issue.where(:project_id => custom_relations_field.project_to_id).each do |issue|
+  custom_values += issue.custom_values.where(:custom_field_id => custom_relations_field.custom_field_id).map{|cv| [cv.value, cv.customized_id] if cv.value.present? }.compact %>
+<% end %>
+<% custom_values.sort_by!{ |v| v[0].to_s.mb_chars.downcase } %>
 <% custom_relations_value = issue.custom_relations_values.select{|crv| crv.custom_relations_field_id == custom_relations_field.id}.first %>
 <% custom_relations_value = custom_relations_value.issue_to_id if custom_relations_value %>
 <%= f.select :issue_to_id, options_for_select(custom_values, :selected => custom_relations_value), { :include_blank => true } %>
