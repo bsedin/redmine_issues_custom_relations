@@ -9,7 +9,7 @@
     <th></th>
   </tr></thead>
   <tbody>
-    <%- @custom_relations_fields.each do |field| %>
+    <%- custom_relations_fields.each do |field| %>
       <tr>
         <td><%= link_to field.name, edit_custom_relations_field_path(field) %></td>
         <td><%= link_to field.project, field.project %></td>
